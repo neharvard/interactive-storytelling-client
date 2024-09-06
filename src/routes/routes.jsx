@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import CreateStory from "../pages/CreateStory/CreateStory";
 import PrivateRoute from "../pages/PrivateRoute/PrivateRoute";
+import AllStory from "../Home/AllStory/AllStory";
 
 
 
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/createStory',
-                element: <PrivateRoute><CreateStory></CreateStory></PrivateRoute> 
+                element: <PrivateRoute><CreateStory></CreateStory></PrivateRoute>
             },
             {
                 path: '/login',
@@ -28,10 +29,14 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp></SignUp>
-              },
-           
+            },
+            {
+                path: '/allStory',
+                element: <AllStory></AllStory>
+            },
+
         ]
-    }    
+    }
 ]);
 
 export default router;
