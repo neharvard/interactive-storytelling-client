@@ -6,6 +6,7 @@ import SignUp from "../pages/SignUp/SignUp";
 import CreateStory from "../pages/CreateStory/CreateStory";
 import PrivateRoute from "../pages/PrivateRoute/PrivateRoute";
 import AllStory from "../Home/AllStory/AllStory";
+import StoryDetail from "../Home/StoryDetail/StoryDetail";
 
 
 
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path: '/allStory',
                 element: <AllStory></AllStory>
+            },
+            {
+                path: '/story/:_id',
+                element: <PrivateRoute><StoryDetail></StoryDetail></PrivateRoute>,
             },
 
         ]
