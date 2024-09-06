@@ -39,7 +39,8 @@ const Navbar = () => {
             .catch()
     }
     const navLinks = <>
-        <li><NavLink to='/'>Home</NavLink></li>
+        <li className="font-bold"><NavLink to='/'>Home</NavLink></li>
+        <li className="font-bold"><NavLink to="/createStory">Create Story</NavLink></li>
     </>
 
     return (
@@ -84,7 +85,7 @@ const Navbar = () => {
                         </>
                     ) : (
                         <Link to='/login'>
-                            <button className="btn">Login</button>
+                            <button className="btn font-sans font-bold">Login</button>
                         </Link>
                     )
                 }
