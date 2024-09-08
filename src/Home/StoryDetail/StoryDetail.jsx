@@ -10,10 +10,10 @@ const StoryDetail = () => {
 
     // Fetch story data
     useEffect(() => {
-        if (!_id || _id.length !== 24) {
-            setError('Invalid story ID');
-            return;
-        }
+        // if (!_id || _id.length !== 24) {
+        //     setError('Invalid story ID');
+        //     return;
+        // }
     
         fetch(`http://localhost:5000/story/${_id}`)
             .then((response) => {
@@ -25,7 +25,8 @@ const StoryDetail = () => {
             .then((data) => setStory(data))
             .catch((error) => setError(error.message));
     }, [_id]); // Only run this effect once when the story ID changes
-
+    
+   
     // Handle path selection
     const handlePathSelection = (pathTitle) => {
         setSelectedPath(pathTitle);
@@ -39,6 +40,7 @@ const StoryDetail = () => {
             },
             body: JSON.stringify({
                 storyId: _id,
+                title: story.title,
                 pathTitle: pathTitle,
                 userId: 'someUserId', // Add if necessary
             }),
@@ -52,6 +54,7 @@ const StoryDetail = () => {
             },
             body: JSON.stringify({
                 storyId: _id,
+                title: story.title,
                 pathTitle: pathTitle,
                 timeSpent: formatTime(timeSpent),
             }),

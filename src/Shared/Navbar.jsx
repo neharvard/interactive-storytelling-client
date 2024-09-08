@@ -18,7 +18,7 @@ const Navbar = () => {
         <li className="font-bold text-base"><NavLink to="/createStory">Create Story</NavLink></li>
         <li className="font-bold text-base"><NavLink to="/allStory">All Story</NavLink></li>
         <li className="font-bold text-base"><NavLink to="/dashboard">Dashboard</NavLink></li>
-        <li className="font-bold text-base"><NavLink to="/time-track">Time Track</NavLink></li> 
+       
     </>
 
     return (
