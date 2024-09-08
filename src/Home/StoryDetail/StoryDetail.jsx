@@ -8,9 +8,8 @@ const StoryDetail = () => {
     const [startTime, setStartTime] = useState(Date.now());
     const [error, setError] = useState(null);
 
-
+    // Fetch story data
     useEffect(() => {
-        // Check if _id is a valid 24-character hex string
         if (!_id || _id.length !== 24) {
             setError('Invalid story ID');
             return;
@@ -25,57 +24,9 @@ const StoryDetail = () => {
             })
             .then((data) => setStory(data))
             .catch((error) => setError(error.message));
-        
-        return () => {
-            const timeSpent = Date.now() - startTime;
-            if (story && selectedPath) {
-                // Ensure all fields are correct here
-                fetch(`http://localhost:5000/story/interaction`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        storyId: _id, // Ensure this is a valid 24-character hex string
-                        pathTitle: selectedPath,
-                        timeSpent: formatTime(timeSpent), // Call formatTime to convert ms to proper format
-                    }),
-                }).catch((error) => console.error('Error:', error));
-            }
-        };
-    }, [_id, selectedPath, startTime, story]);
-    
+    }, [_id]); // Only run this effect once when the story ID changes
 
-    // useEffect(() => {
-    //     fetch(`http://localhost:5000/story/${_id}`)
-    //         .then((response) => {
-    //             if (!response.ok) {
-    //                 throw new Error('Failed to fetch story');
-    //             }
-    //             return response.json();
-    //         })
-    //         .then((data) => setStory(data))
-    //         .catch((error) => setError(error.message));
-
-    //     return () => {
-    //         const timeSpent = Date.now() - startTime;
-    //         if (story && selectedPath) {
-    //             // Ensure all fields are correct here
-    //             fetch(`http://localhost:5000/story/interaction`, {
-    //                 method: 'POST',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                 },
-    //                 body: JSON.stringify({
-    //                     storyId: _id, // Ensure this is a valid 24-character hex string
-    //                     pathTitle: selectedPath,
-    //                     timeSpent: formatTime(timeSpent), // Call formatTime to convert ms to proper format
-    //                 }),
-    //             }).catch((error) => console.error('Error:', error));
-    //         }
-    //     };
-    // }, [_id, selectedPath, startTime, story]);
-
+    // Handle path selection
     const handlePathSelection = (pathTitle) => {
         setSelectedPath(pathTitle);
         const timeSpent = Date.now() - startTime;
@@ -91,9 +42,9 @@ const StoryDetail = () => {
                 pathTitle: pathTitle,
                 userId: 'someUserId', // Add if necessary
             }),
-        }).catch((error) => console.error('Error:', error));
+        }).catch((error) => console.error('Error posting choice:', error));
 
-        // Record the time spent on the path
+        // Post time spent on the path
         fetch(`http://localhost:5000/story/interaction`, {
             method: 'POST',
             headers: {
@@ -104,9 +55,9 @@ const StoryDetail = () => {
                 pathTitle: pathTitle,
                 timeSpent: formatTime(timeSpent),
             }),
-        }).catch((error) => console.error('Error:', error));
+        }).catch((error) => console.error('Error posting interaction:', error));
 
-        // Reset startTime after a path is selected
+        // Reset start time after posting
         setStartTime(Date.now());
     };
 
