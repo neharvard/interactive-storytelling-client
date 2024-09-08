@@ -7,6 +7,8 @@ import CreateStory from "../pages/CreateStory/CreateStory";
 import PrivateRoute from "../pages/PrivateRoute/PrivateRoute";
 import AllStory from "../Home/AllStory/AllStory";
 import StoryDetail from "../Home/StoryDetail/StoryDetail";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import TimeTrack from "../pages/Dashboard/TimeTrack/TimeTrack";
 
 
 
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
             {
                 path: '/story/:_id',
                 element: <PrivateRoute><StoryDetail></StoryDetail></PrivateRoute>,
+            },
+            {
+                path: '/dashboard',
+                element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+            },
+            {
+                path: '/time-track',
+                element: <PrivateRoute><TimeTrack></TimeTrack></PrivateRoute>, 
             },
 
         ]
